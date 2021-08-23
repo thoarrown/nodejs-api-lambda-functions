@@ -1,0 +1,382 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/hello": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "operationId": "AuthController_signup",
+        "summary": "Sign up",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthSignupReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthSignupResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "operationId": "AuthController_signin",
+        "summary": "Sign in",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthSigninReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "operationId": "AuthController_getMe",
+        "summary": "Sign in",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/post": {
+      "post": {
+        "operationId": "PostController_createPost",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCreateReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Post"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "PostController_getPosts",
+        "parameters": [
+          {
+            "name": "take",
+            "required": true,
+            "in": "query",
+            "example": 10,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": true,
+            "in": "query",
+            "example": 0,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Post"
+        ]
+      }
+    },
+    "/post/{id}": {
+      "put": {
+        "operationId": "PostController_updatePost",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostUpdateReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Post"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "PostController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Post"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/post/{slug}": {
+      "get": {
+        "operationId": "PostController_getPost",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Post"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "APP API",
+    "description": "Document App api",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "AuthSignupReq": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "email",
+            "example": "demo@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "xxxx"
+          },
+          "name": {
+            "type": "string",
+            "example": "Jamdam"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "example": "1990-09-09"
+          },
+          "role": {
+            "type": "string",
+            "example": "USER"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "name"
+        ]
+      },
+      "AuthSignupResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of user"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "Date of birth user"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email user"
+          },
+          "role": {
+            "type": "string",
+            "description": "Role of user"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "dateOfBirth",
+          "email",
+          "role"
+        ]
+      },
+      "AuthSigninReq": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "email",
+            "example": "demo@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "xxxx"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "PostCreateReq": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "content": {
+            "type": "string",
+            "example": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"
+          },
+          "slug": {
+            "type": "string",
+            "example": "hello-world"
+          }
+        },
+        "required": [
+          "title",
+          "content",
+          "slug"
+        ]
+      },
+      "PostUpdateReq": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Lorem Ipsum"
+          },
+          "content": {
+            "type": "string",
+            "example": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"
+          },
+          "slug": {
+            "type": "string",
+            "example": "hello-world"
+          }
+        },
+        "required": [
+          "title",
+          "content",
+          "slug"
+        ]
+      }
+    }
+  }
+}

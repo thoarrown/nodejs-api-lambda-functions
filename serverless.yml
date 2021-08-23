@@ -1,0 +1,34 @@
+service: backend-coding-test
+frameworkVersion: '2'
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  profile: serverlessUser
+  apiGateway:
+    shouldStartNameWithService: true
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-optimize
+  - serverless-dotenv-plugin
+  - serverless-plugin-warmup
+
+package:
+  exclude:
+    - node_modules/**
+
+functions:
+  main:
+    warmup: true
+    handler: dist/lambda.handler
+    events:
+      - http:
+          method: any
+          path: /{any+}
+  postcron:
+    handler: dist/cron/post.handler
+    events:
+      - schedule: cron(0 01 * * ? *)
