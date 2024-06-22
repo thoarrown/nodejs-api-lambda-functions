@@ -18,7 +18,7 @@
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
     "@nestjs/common": "^8.0.5",
-    "@nestjs/core": "^8.0.5",
+    "@nestjs/core": "^9.0.5",
     "@nestjs/passport": "^8.0.0",
     "@nestjs/platform-express": "^8.0.5",
     "@nestjs/swagger": "^5.0.9",
@@ -46,7 +46,7 @@
     "slug": "^5.1.0",
     "source-map-support": "^0.5.19",
     "swagger-ui-express": "^4.1.6",
-    "typeorm": "^0.2.36",
+    "typeorm": "^0.3.14",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
