@@ -63,7 +63,7 @@
     "json-schema-to-ts": "^1.5.0",
     "lorem-ipsum": "^2.0.3",
     "plugin": "^0.3.3",
-    "serverless": "^2.23.0",
+    "serverless": "^4.4.15",
     "serverless-dotenv-plugin": "^3.9.0",
     "serverless-offline": "^8.0.0",
     "serverless-plugin-optimize": "^4.2.1-rc.1",
